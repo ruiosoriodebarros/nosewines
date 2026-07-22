@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A planície alentejana ao entardecer, com renques de vinha e sobreiros ao longe">
+  <defs>
+    <linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#431923"/>
+      <stop offset=".34"  stop-color="#6E3340"/>
+      <stop offset=".62"  stop-color="#A55F67"/>
+      <stop offset=".83"  stop-color="#D29A8E"/>
+      <stop offset="1"    stop-color="#EBD9BE"/>
+    </linearGradient>
+    <radialGradient id="brilho" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F7EEDC" stop-opacity=".8"/>
+      <stop offset=".45" stop-color="#F0C9A6" stop-opacity=".3"/>
+      <stop offset="1"   stop-color="#F0C9A6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chao" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#C0A374"/>
+      <stop offset=".30" stop-color="#A38A5E"/>
+      <stop offset="1"   stop-color="#4E4230"/>
+    </linearGradient>
+    <linearGradient id="veu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EBD9BE" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#EBD9BE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Céu: ocupa dois terços. O wordmark assenta aqui, longe do horizonte. -->
+  <rect width="1600" height="602" fill="url(#ceu)"/>
+  <circle cx="1150" cy="556" r="240" fill="url(#brilho)"/>
+  <circle cx="1150" cy="558" r="48" fill="#F9F1E0" opacity=".95"/>
+
+  <!-- Serras ao fundo -->
+  <path d="M0 582 L150 556 L286 574 L430 542 L560 572 L700 550 L860 576 L1000 552 L1160 574 L1320 548 L1460 572 L1600 554 L1600 602 L0 602 Z"
+        fill="#5E2733" opacity=".38"/>
+  <path d="M0 594 L180 578 L340 592 L520 570 L690 590 L900 574 L1080 592 L1290 576 L1460 594 L1600 580 L1600 602 L0 602 Z"
+        fill="#43202A" opacity=".5"/>
+  <rect y="566" width="1600" height="56" fill="url(#veu)"/>
+
+  <!-- Planície -->
+  <rect y="602" width="1600" height="298" fill="url(#chao)"/>
+
+  <!-- Renques de vinha, a convergir no horizonte -->
+  <g stroke="#4C4130" stroke-linecap="round" opacity=".45">
+    <path d="M1150 604 L-460 900" stroke-width="7"/>
+    <path d="M1150 604 L-140 900" stroke-width="6"/>
+    <path d="M1150 604 L160 900"  stroke-width="6"/>
+    <path d="M1150 604 L410 900"  stroke-width="5"/>
+    <path d="M1150 604 L620 900"  stroke-width="5"/>
+    <path d="M1150 604 L800 900"  stroke-width="4"/>
+    <path d="M1150 604 L960 900"  stroke-width="4"/>
+    <path d="M1150 604 L1105 900" stroke-width="3"/>
+    <path d="M1150 604 L1270 900" stroke-width="4"/>
+    <path d="M1150 604 L1460 900" stroke-width="4"/>
+    <path d="M1150 604 L1700 900" stroke-width="5"/>
+    <path d="M1150 604 L2020 900" stroke-width="6"/>
+    <path d="M1150 604 L2400 900" stroke-width="7"/>
+  </g>
+
+  <!-- Sulcos: profundidade do terreno -->
+  <g stroke="#3E3527" fill="none" opacity=".18">
+    <path d="M0 632 Q800 624 1600 634" stroke-width="1.5"/>
+    <path d="M0 672 Q800 660 1600 676" stroke-width="2"/>
+    <path d="M0 730 Q800 712 1600 736" stroke-width="2.5"/>
+    <path d="M0 806 Q800 782 1600 814" stroke-width="3.5"/>
+  </g>
+
+  <!-- Sobreiros na linha do horizonte -->
+  <g fill="#2B2620">
+    <g opacity=".5" transform="translate(258 600) scale(.34)">
+      <rect x="-4" y="-26" width="8" height="30"/>
+      <path d="M-46 -30 q-6 -34 24 -42 q12 -22 42 -14 q30 -6 34 24 q20 14 6 34 z"/>
+    </g>
+    <g opacity=".62" transform="translate(486 602) scale(.46)">
+      <rect x="-5" y="-30" width="10" height="34"/>
+      <path d="M-50 -32 q-8 -36 26 -46 q14 -24 46 -14 q32 -6 36 26 q22 16 6 36 z"/>
+    </g>
+    <g opacity=".78" transform="translate(1412 606) scale(.66)">
+      <rect x="-7" y="-36" width="14" height="42"/>
+      <path d="M-58 -38 q-10 -42 30 -54 q16 -28 54 -16 q38 -8 42 30 q26 18 8 42 z"/>
+    </g>
+    <g transform="translate(112 614) scale(.9)">
+      <rect x="-8" y="-42" width="16" height="48"/>
+      <path d="M-64 -44 q-12 -48 34 -60 q18 -32 60 -18 q44 -8 46 34 q30 20 10 46 z"/>
+    </g>
+  </g>
+
+  <!-- Escurecimento na base, para os botões assentarem -->
+  <rect y="700" width="1600" height="200" fill="#241C15" opacity=".26"/>
+</svg>

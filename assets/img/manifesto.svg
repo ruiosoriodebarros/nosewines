@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Um caminho de terra a serpentear até ao horizonte ao amanhecer, na planície alentejana">
+  <defs>
+    <linearGradient id="m-ceu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#2E1620"/>
+      <stop offset=".32" stop-color="#5C2C3A"/>
+      <stop offset=".58" stop-color="#93636D"/>
+      <stop offset=".80" stop-color="#CFA48F"/>
+      <stop offset="1"   stop-color="#EBD9BE"/>
+    </linearGradient>
+    <radialGradient id="m-glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F9EFD9" stop-opacity=".85"/>
+      <stop offset=".45" stop-color="#E6C39C" stop-opacity=".32"/>
+      <stop offset="1"   stop-color="#E6C39C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="m-chao" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#BFA274"/>
+      <stop offset=".30" stop-color="#A2895D"/>
+      <stop offset="1"   stop-color="#4C4030"/>
+    </linearGradient>
+    <linearGradient id="m-road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#D9C49B"/>
+      <stop offset="1"   stop-color="#8F7A55"/>
+    </linearGradient>
+    <linearGradient id="m-veu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EBD9BE" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#EBD9BE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Céu do amanhecer -->
+  <rect width="1600" height="566" fill="url(#m-ceu)"/>
+  <circle cx="612" cy="548" r="230" fill="url(#m-glow)"/>
+  <circle cx="612" cy="552" r="44" fill="#FBF3E1" opacity=".92"/>
+
+  <!-- Serras -->
+  <path d="M0 566 L150 542 L300 560 L460 532 L620 558 L780 536 L940 560 L1100 534 L1280 558 L1440 538 L1600 558 L1600 566 Z"
+        fill="#5E2733" opacity=".36"/>
+  <path d="M0 566 L200 552 L380 566 L560 546 L740 564 L940 548 L1140 566 L1340 550 L1520 566 L1600 558 L1600 566 Z"
+        fill="#43202A" opacity=".48"/>
+  <rect y="530" width="1600" height="56" fill="url(#m-veu)"/>
+
+  <!-- Planície -->
+  <rect y="566" width="1600" height="334" fill="url(#m-chao)"/>
+
+  <!-- O caminho: começa largo em baixo, serpenteia e afina no horizonte -->
+  <path d="M452 900 C 612 772 700 660 640 570 L664 570 C 812 662 1004 782 1132 900 Z" fill="url(#m-road)"/>
+  <!-- risco central, aos tracejados -->
+  <path d="M792 900 C 720 780 704 668 652 572" fill="none" stroke="#F1E4C6" stroke-width="4"
+        stroke-linecap="round" stroke-dasharray="3 26" opacity=".55"/>
+  <!-- bermas -->
+  <path d="M452 900 C 612 772 700 660 640 570" fill="none" stroke="#6E5C3E" stroke-width="3" opacity=".4"/>
+  <path d="M664 570 C 812 662 1004 782 1132 900" fill="none" stroke="#6E5C3E" stroke-width="3" opacity=".4"/>
+
+  <!-- Sulcos do terreno -->
+  <g stroke="#3E3527" fill="none" opacity=".16">
+    <path d="M0 616 Q800 606 1600 620" stroke-width="1.5"/>
+    <path d="M0 664 Q800 650 1600 670" stroke-width="2"/>
+    <path d="M0 730 Q800 708 1600 738" stroke-width="2.5"/>
+    <path d="M0 818 Q800 792 1600 828" stroke-width="3.5"/>
+  </g>
+
+  <!-- Sobreiro grande, junto ao caminho -->
+  <g fill="#2B2620">
+    <g transform="translate(1210 592) scale(1.05)">
+      <rect x="-8" y="-42" width="16" height="48"/>
+      <path d="M-64 -44 q-12 -48 34 -60 q18 -32 60 -18 q44 -8 46 34 q30 20 10 46 z"/>
+    </g>
+    <g opacity=".7" transform="translate(300 578) scale(.5)">
+      <rect x="-5" y="-30" width="10" height="34"/>
+      <path d="M-50 -32 q-8 -36 26 -46 q14 -24 46 -14 q32 -6 36 26 q22 16 6 36 z"/>
+    </g>
+    <g opacity=".5" transform="translate(196 570) scale(.34)">
+      <rect x="-4" y="-26" width="8" height="30"/>
+      <path d="M-46 -30 q-6 -34 24 -42 q12 -22 42 -14 q30 -6 34 24 q20 14 6 34 z"/>
+    </g>
+  </g>
+
+  <rect y="700" width="1600" height="200" fill="#241C15" opacity=".24"/>
+</svg>

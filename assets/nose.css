@@ -1,0 +1,614 @@
+/* ==========================================================================
+   NO SÉ! — linguagem visual de herdade alentejana
+   Mantém a paleta e a voz do NoSé!; adopta o formato: logótipo centrado,
+   hero de imagem inteira, bandas alternadas foto/texto, muito ar, rodapé
+   institucional.
+   ========================================================================== */
+
+:root{
+  --areia:#E8DEC9;
+  --cru:#F4EDDC;
+  --bordo:#571E29;
+  --bordo-deep:#3B131C;
+  --tinta:#241C15;
+  --garrafa:#33503F;
+  --linha:rgba(36,28,21,.16);
+
+  --grao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+  /* Azulejo mantido, mas discreto: aqui manda a imagem e o espaço. */
+  --azulejo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg stroke='%23571E29' stroke-width='1' fill='none' opacity='.06'%3E%3Cpath d='M-2 -2 L50 50 M50 -2 L-2 50'/%3E%3C/g%3E%3Cg fill='%23571E29' opacity='.07'%3E%3Cpath d='M24 17 Q28 20 24 24 Q20 20 24 17 Z M24 31 Q28 28 24 24 Q20 28 24 31 Z M17 24 Q20 28 24 24 Q20 20 17 24 Z M31 24 Q28 28 24 24 Q28 20 31 24 Z'/%3E%3C/g%3E%3C/svg%3E");
+
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Archivo", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background-color:var(--cru);
+  background-image:var(--grao);
+  background-size:240px 240px;
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--sans);cursor:pointer}
+::selection{background:var(--bordo);color:var(--cru)}
+
+/* ---------- Tipografia comum ---------- */
+.eyebrow{
+  font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;
+  font-weight:600;color:var(--bordo);margin-bottom:1.6rem;
+}
+.display{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2.4rem,4.6vw,4rem);line-height:1.08;letter-spacing:-.015em;
+}
+.lead{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(1.15rem,1.9vw,1.5rem);line-height:1.55;
+  max-width:34em;opacity:.85;
+}
+.corpo{max-width:36em;margin-top:1.6rem;opacity:.82;font-size:1.02rem}
+.corpo + .corpo{margin-top:1.1rem}
+.rule{width:56px;height:1px;background:var(--bordo);opacity:.5;margin:2.2rem 0}
+
+/* ---------- Botões ---------- */
+.btn{
+  display:inline-block;padding:1.05rem 2.4rem;
+  font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  border:1px solid var(--tinta);transition:background .28s ease,color .28s ease,border-color .28s ease;
+}
+.btn-solid{background:var(--tinta);color:var(--cru)}
+.btn-solid:hover{background:var(--bordo);border-color:var(--bordo)}
+.btn-ghost{background:transparent;color:var(--tinta)}
+.btn-ghost:hover{background:var(--tinta);color:var(--cru)}
+.btn-claro{border-color:var(--cru);color:var(--cru);background:transparent}
+.btn-claro:hover{background:var(--cru);color:var(--bordo-deep)}
+.btn-claro-solid{background:var(--cru);color:var(--bordo-deep);border-color:var(--cru)}
+.btn-claro-solid:hover{background:transparent;color:var(--cru)}
+
+/* ---------- Barra de anúncio (rotativa) ---------- */
+.announce{
+  position:relative;overflow:hidden;z-index:60;
+  background:var(--bordo-deep);color:rgba(244,237,220,.9);
+  font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+}
+/* As mensagens deslizam na vertical, uma de cada vez. A 1ª fica no fluxo
+   (define a altura da barra); a 2ª sobrepõe-se em absoluto. */
+.announce .msg{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:.7rem 1.2rem;line-height:1.1;
+  animation:ann-rot 9s infinite;
+}
+.announce .msg--2{position:absolute;inset:0;opacity:0;animation-delay:-4.5s}
+@keyframes ann-rot{
+  0%   {opacity:0;transform:translateY(100%)}
+  6%   {opacity:1;transform:translateY(0)}
+  44%  {opacity:1;transform:translateY(0)}
+  50%  {opacity:0;transform:translateY(-100%)}
+  100% {opacity:0;transform:translateY(-100%)}
+}
+/* Sem movimento: mostra as duas mensagens lado a lado, estáticas. */
+@media(prefers-reduced-motion:reduce){
+  .announce{overflow:visible;padding:.65rem 1.2rem;text-align:center}
+  .announce .msg{position:static;display:inline;padding:0;animation:none;opacity:1;transform:none}
+  .announce .msg--2::before{content:" · "}
+}
+
+/* ---------- Cabeçalho: logótipo ao centro ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(244,237,220,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linha);
+  transition:background .3s ease,border-color .3s ease;
+}
+/* Sobre o hero o cabeçalho fica transparente e a tipografia inverte.
+   Mantém-se sticky (no fluxo) — é o hero que sobe para debaixo dele
+   (ver .hero margin-top). Usar position:fixed punha-o por baixo da
+   barra de anúncio e cortava o logótipo. */
+/* Sobre o hero: transparente E sem desfoque. O backdrop-filter herdado
+   embaciava as ilustrações que agora ficam no topo (peças, folhas da videira). */
+body.hero-top header{
+  background:transparent;border-bottom-color:transparent;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+body.hero-top header .logo,
+body.hero-top header nav.main a,
+body.hero-top header .cart-btn,
+body.hero-top header .header-l{color:var(--cru)}
+body.hero-top header .cart-btn{border-color:rgba(244,237,220,.5)}
+body.hero-top header .cart-btn:hover{background:var(--cru);color:var(--bordo-deep);border-color:var(--cru)}
+body.hero-top header nav.main a::after{background:var(--cru)}
+body.hero-top .logo .bang{color:#E8B4BC}
+
+.header-in{
+  max-width:1320px;margin:0 auto;padding:1.35rem 2rem 1.1rem;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;
+}
+.header-l{font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;opacity:.5;font-weight:600}
+.logo{
+  font-family:var(--serif);font-weight:400;font-size:1.75rem;
+  letter-spacing:.06em;line-height:1;white-space:nowrap;text-align:center;
+}
+.logo .bang{color:var(--bordo)}
+.header-r{display:flex;justify-content:flex-end}
+.cart-btn{
+  background:transparent;color:var(--tinta);border:1px solid var(--linha);
+  padding:.6rem 1.2rem;font-size:.68rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;transition:background .25s,color .25s,border-color .25s;
+}
+.cart-btn:hover{background:var(--tinta);color:var(--cru);border-color:var(--tinta)}
+
+nav.main{
+  display:flex;justify-content:center;gap:2.8rem;
+  padding:.2rem 1rem 1rem;
+  font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+}
+nav.main a{position:relative;padding:.35rem 0;transition:color .25s}
+nav.main a::after{
+  content:"";position:absolute;left:50%;bottom:0;width:0;height:1px;
+  background:var(--bordo);transition:width .3s ease,left .3s ease;
+}
+nav.main a:hover::after,nav.main a:focus-visible::after,nav.main a.active::after{width:100%;left:0}
+nav.main a.active{color:var(--bordo)}
+body.hero-top nav.main a.active{color:var(--cru)}
+
+/* ---------- Hero de imagem inteira ---------- */
+.hero{
+  position:relative;
+  /* No telemóvel, 100vh conta com a barra do browser: o hero fica mais alto
+     que o ecrã e empurra o conteúdo. svh mede o ecrã real (com fallback). */
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;background:var(--bordo-deep);
+  /* Sobe para debaixo do cabeçalho, que fica a flutuar por cima da imagem.
+     --header-h é medida em JS (a altura muda com o carregamento das fontes). */
+  margin-top:calc(-1 * var(--header-h, 112px));
+}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* Véu escuro. Ligeiro a meio (o horizonte foi baixado no SVG, por isso o
+   wordmark assenta no céu limpo) e denso em baixo, para os botões lerem. */
+.hero-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(36,28,21,.46) 0%,rgba(36,28,21,.22) 45%,rgba(36,28,21,.70) 100%);
+}
+.hero-in{
+  position:relative;z-index:2;color:var(--cru);max-width:1000px;
+  padding:calc(var(--header-h, 112px) + 5rem) 1.5rem 7rem;
+}
+.hero-eyebrow{
+  font-size:.7rem;letter-spacing:.36em;text-transform:uppercase;font-weight:600;
+  color:rgba(244,237,220,.8);margin-bottom:2rem;
+}
+.wordmark{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(4rem,12vw,10rem);line-height:.92;letter-spacing:.01em;
+  text-shadow:0 6px 40px rgba(36,28,21,.35);
+}
+.wordmark .bang{color:#E8B4BC}
+.hero-sub{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.5;
+  max-width:30em;margin:2rem auto 2.8rem;color:rgba(244,237,220,.92);
+}
+.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.hero-cue{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:2;
+  color:rgba(244,237,220,.65);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:.8rem;
+}
+.hero-cue span{
+  display:block;width:1px;height:46px;background:rgba(244,237,220,.5);
+  transform-origin:top;animation:cue 2.4s ease-in-out infinite;
+}
+@keyframes cue{0%,100%{transform:scaleY(.35);opacity:.35}50%{transform:scaleY(1);opacity:1}}
+
+/* ---------- Bandas alternadas foto / texto ---------- */
+.band{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:78vh}
+.band-media{position:relative;overflow:hidden;background:var(--areia)}
+.band-media img,.band-media svg{width:100%;height:100%;object-fit:cover;display:block}
+.band-text{display:flex;flex-direction:column;justify-content:center;padding:7rem 6rem}
+.band.invertida .band-media{order:2}
+.band.invertida .band-text{order:1}
+.band.escura{background:var(--bordo);color:var(--cru)}
+.band.escura .eyebrow{color:rgba(244,237,220,.7)}
+.band.escura .rule{background:var(--cru);opacity:.4}
+.band.areia{background:var(--areia);background-image:var(--azulejo);background-size:48px 48px}
+@media(max-width:980px){
+  .band{grid-template-columns:1fr;min-height:0}
+  .band-media{min-height:58vh}
+  .band.invertida .band-media,.band.invertida .band-text{order:0}
+  .band-text{padding:4.5rem 1.75rem}
+}
+
+/* Garrafa desenhada: dentro da banda, respira em vez de encher */
+.band-media.garrafa{
+  background:var(--cru);display:flex;align-items:center;justify-content:center;padding:4rem;
+}
+.band-media.garrafa .bottle{width:auto;height:auto;max-height:66vh;object-fit:contain}
+.bottle .lbl{font-family:var(--serif);font-weight:600;fill:var(--tinta)}
+.bottle .lbl-bang{fill:var(--bordo)}
+.bottle .lbl-sub{
+  font-family:var(--sans);font-weight:700;font-size:8.5px;letter-spacing:2.4px;fill:var(--bordo);
+}
+.band-cta{margin-top:2.6rem}
+
+/* ---------- Secções ---------- */
+.sec{padding:8rem 2rem}
+.sec-cta{text-align:center;margin-top:4rem}
+
+/* Vitrine: três portas para a loja */
+.vitrine{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.vit{display:block;text-align:center}
+.vit-img{
+  display:block;position:relative;overflow:hidden;
+  aspect-ratio:3/4;background:var(--areia);margin-bottom:1.5rem;
+}
+.vit-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.2,.7,.3,1);
+}
+.vit:hover .vit-img img{transform:scale(1.05)}
+.vit-n{
+  display:block;font-family:var(--serif);font-weight:400;font-size:1.5rem;
+  margin-bottom:.4rem;
+}
+.vit-p{
+  display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:600;color:var(--bordo);
+}
+@media(max-width:860px){.vitrine{grid-template-columns:1fr;gap:3rem}}
+.sec-in{max-width:1320px;margin:0 auto}
+.sec.areia{background:var(--areia);background-image:var(--azulejo);background-size:48px 48px}
+.sec.escura{background:var(--bordo);color:var(--cru)}
+.sec-head{max-width:44em;margin-bottom:4.5rem}
+.sec-head.centro{margin-left:auto;margin-right:auto;text-align:center}
+@media(max-width:760px){.sec{padding:5rem 1.5rem}}
+
+/* ---------- Hero de página interior ----------
+   Como o do index, mas mais baixo e com o texto ancorado em baixo, para
+   o assunto de cada arte (caminho, estendal, videira) ficar visível acima. */
+.hero.hero-mid{
+  min-height:60vh;min-height:60svh;
+  align-items:flex-end;
+  /* Reserva a altura do cabeçalho flutuante: com o texto ancorado em baixo,
+     num ecrã curto o bloco subia e a migalha ("Início / Loja") chocava com o
+     logótipo e o menu. Este padding impede-o de entrar na zona do cabeçalho;
+     e como é min-height, a banda cresce se o conteúdo não couber (não corta). */
+  padding-top:var(--header-h, 112px);
+}
+.hero.hero-mid .hero-in{padding:1.5rem 1.5rem 3.8rem;width:100%}
+.hero .crumb{color:rgba(244,237,220,.85);margin-bottom:1.3rem}
+.hero .crumb a{color:inherit}
+.hero .crumb a:hover{opacity:1}
+.hero-mid .page-title{color:var(--cru);text-shadow:0 4px 30px rgba(36,28,21,.4)}
+.hero-mid .hero-sub{margin-bottom:0}
+
+/* ---------- Cabeçalho de página interior (fallback, sem arte) ---------- */
+.page-head{
+  padding:7rem 2rem 5rem;text-align:center;
+  background:var(--areia);background-image:var(--azulejo);background-size:48px 48px;
+  border-bottom:1px solid var(--linha);
+}
+.crumb{
+  font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;font-weight:600;
+  color:var(--bordo);margin-bottom:1.5rem;
+}
+.crumb a{opacity:.5;transition:opacity .2s}
+.crumb a:hover{opacity:1}
+.crumb i{font-style:normal;opacity:.35;margin:0 .6rem}
+.page-title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2.6rem,5.5vw,4.6rem);line-height:1.05;letter-spacing:-.015em;
+}
+.page-lead{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1.55;
+  max-width:34em;margin:1.6rem auto 0;opacity:.78;
+}
+
+/* ---------- Manifesto ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr}
+.duo-col{padding:5rem 4rem}
+.duo-col h3{font-family:var(--serif);font-weight:400;font-size:1.9rem;margin-bottom:2.5rem}
+.duo-col ul{list-style:none}
+.duo-col li{
+  font-family:var(--serif);font-style:italic;font-size:1.1rem;line-height:1.5;
+  padding:1.3rem 0;border-bottom:1px dotted var(--linha);
+}
+.duo-col li:last-child{border-bottom:0}
+.duo-col.sei{background:var(--bordo);color:var(--cru)}
+.duo-col.sei li{border-bottom-color:rgba(244,237,220,.22)}
+.fecho{
+  text-align:center;max-width:32em;margin:0 auto;padding:6rem 1.5rem;
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.35;
+}
+.fecho em{font-style:italic;color:var(--bordo);display:block}
+@media(max-width:860px){
+  .duo{grid-template-columns:1fr}
+  .duo-col{padding:3.5rem 1.75rem}
+}
+
+/* ---------- Loja ---------- */
+.filters{display:flex;gap:2.2rem;justify-content:center;flex-wrap:wrap;margin-bottom:4.5rem}
+.filter{
+  border:0;background:transparent;padding:.5rem 0;position:relative;
+  font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(36,28,21,.5);transition:color .25s;
+}
+.filter::after{
+  content:"";position:absolute;left:50%;bottom:0;width:0;height:1px;
+  background:var(--bordo);transition:width .3s ease,left .3s ease;
+}
+.filter:hover{color:var(--tinta)}
+.filter.active{color:var(--bordo)}
+.filter.active::after{width:100%;left:0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:3.5rem 2.5rem}
+.card{background:transparent;display:flex;flex-direction:column}
+.card-img{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  background:var(--areia);margin-bottom:1.4rem;
+}
+.card-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:opacity .5s ease,transform .8s cubic-bezier(.2,.7,.3,1);
+}
+.card-img img.hover{position:absolute;inset:0;opacity:0}
+.card:hover .card-img img{transform:scale(1.04)}
+.card:hover .card-img img.hover{opacity:1}
+.card-body{display:flex;flex-direction:column;gap:.4rem;flex:1;text-align:center}
+.card-name{font-family:var(--serif);font-weight:400;font-size:1.25rem;line-height:1.3}
+.card-var{
+  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(36,28,21,.5);font-weight:600;
+}
+.card-foot{margin-top:1.1rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.price{font-family:var(--serif);font-weight:400;font-size:1.15rem}
+.add{
+  background:transparent;color:var(--tinta);border:1px solid var(--linha);
+  padding:.75rem 1.8rem;font-size:.66rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;transition:background .25s,color .25s,border-color .25s;
+}
+.add:hover{background:var(--bordo);color:var(--cru);border-color:var(--bordo)}
+.add.added{background:var(--garrafa);color:var(--cru);border-color:var(--garrafa)}
+
+/* ---------- Ficha técnica ---------- */
+.ficha{
+  max-width:56em;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:0 4rem;
+}
+.ficha-l{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;
+  padding:1.5rem 0;border-bottom:1px dotted var(--linha);
+}
+.ficha-k{
+  font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:600;color:var(--bordo);white-space:nowrap;
+}
+.ficha-v{font-family:var(--serif);font-style:italic;font-size:1.1rem;text-align:right}
+@media(max-width:760px){.ficha{grid-template-columns:1fr;gap:0}}
+
+/* ---------- Newsletter ---------- */
+.news-form{display:flex;gap:0;margin-top:2.5rem;max-width:30rem;flex-wrap:wrap}
+.news-form input{
+  flex:1;min-width:200px;background:transparent;
+  border:0;border-bottom:1px solid rgba(244,237,220,.45);
+  color:var(--cru);padding:1rem .2rem;font-family:var(--sans);font-size:.95rem;
+  outline:none;transition:border-color .25s;
+}
+.news-form input::placeholder{color:rgba(244,237,220,.45)}
+.news-form input:focus{border-bottom-color:var(--cru)}
+.news-form button{
+  background:transparent;color:var(--cru);border:0;
+  border-bottom:1px solid rgba(244,237,220,.45);
+  padding:1rem 0 1rem 1.6rem;font-weight:600;font-size:.7rem;letter-spacing:.22em;
+  text-transform:uppercase;transition:color .25s;white-space:nowrap;
+}
+.news-form button:hover{color:#E8B4BC}
+.news-ok{margin-top:1.4rem;font-family:var(--serif);font-style:italic;font-size:1.05rem;display:none}
+
+/* ---------- Faixa "a seguir" ---------- */
+.next{border-top:1px solid var(--linha);background:var(--cru)}
+.next-in{
+  max-width:1320px;margin:0 auto;padding:5rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.next-l{
+  font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;
+  font-weight:600;color:var(--bordo);margin-bottom:.6rem;
+}
+.next-t{font-family:var(--serif);font-weight:300;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15}
+
+/* ---------- Rodapé institucional ---------- */
+footer{background:var(--tinta);color:var(--areia);padding-top:6rem}
+.foot-top{
+  max-width:1320px;margin:0 auto;padding:0 2rem 4rem;text-align:center;
+  border-bottom:1px solid rgba(244,237,220,.14);
+}
+.foot-logo{font-family:var(--serif);font-weight:300;font-size:2.6rem;letter-spacing:.06em}
+.foot-logo .bang{color:#E8B4BC}
+.foot-tag{
+  font-family:var(--serif);font-style:italic;font-size:1.05rem;
+  opacity:.6;max-width:26em;margin:1.2rem auto 0;
+}
+.foot-in{
+  max-width:1320px;margin:0 auto;padding:4rem 2rem;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;
+}
+.foot-h{
+  font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;
+  font-weight:600;margin-bottom:1.5rem;opacity:.5;
+}
+.foot-col p,.foot-col a{display:block;font-size:.92rem;opacity:.75;line-height:1.9}
+.foot-col a{transition:opacity .2s,color .2s}
+.foot-col a:hover{opacity:1;color:#E8B4BC}
+.foot-bottom{
+  border-top:1px solid rgba(244,237,220,.14);
+  max-width:1320px;margin:0 auto;padding:2rem;
+  display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
+  font-size:.72rem;letter-spacing:.06em;opacity:.5;
+}
+@media(max-width:900px){
+  .foot-in{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .foot-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:560px){.foot-in{grid-template-columns:1fr;text-align:center}}
+
+/* ---------- Cesto (gaveta) ---------- */
+.drawer-bg{
+  position:fixed;inset:0;background:rgba(36,28,21,.55);
+  opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:80;
+}
+body.cart-open .drawer-bg{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(430px,100%);
+  background:var(--cru);z-index:90;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .38s cubic-bezier(.4,0,.2,1);
+  box-shadow:-20px 0 60px rgba(36,28,21,.18);
+}
+body.cart-open .drawer{transform:none}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.8rem;border-bottom:1px solid var(--linha);
+}
+.drawer-head h3{font-family:var(--serif);font-weight:400;font-size:1.4rem}
+.drawer-close{background:transparent;border:0;font-size:1.8rem;line-height:1;color:var(--tinta);opacity:.6}
+.drawer-close:hover{opacity:1}
+.drawer-items{flex:1;overflow-y:auto;padding:1.4rem 1.8rem}
+.drawer-empty{
+  font-family:var(--serif);font-style:italic;text-align:center;
+  padding:4rem 1rem;opacity:.55;line-height:1.7;
+}
+.d-item{
+  display:grid;grid-template-columns:64px 1fr auto;gap:1rem;align-items:center;
+  padding:1.2rem 0;border-bottom:1px solid var(--linha);
+}
+.d-item img{width:64px;height:78px;object-fit:cover;background:var(--areia)}
+.d-name{font-family:var(--serif);font-size:1rem;line-height:1.3}
+.d-var{
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  opacity:.55;font-weight:600;margin-bottom:.5rem;
+}
+.d-qty{display:flex;align-items:center;gap:.7rem}
+.d-qty button{
+  width:24px;height:24px;border:1px solid var(--linha);background:transparent;
+  font-size:.9rem;line-height:1;color:var(--tinta);transition:background .2s,color .2s;
+}
+.d-qty button:hover{background:var(--tinta);color:var(--cru)}
+.d-qty span{font-size:.9rem;min-width:1.2em;text-align:center}
+.d-price{font-family:var(--serif);font-size:1rem}
+.drawer-foot{padding:1.6rem 1.8rem 2rem;border-top:1px solid var(--linha);display:none}
+.drawer-total{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--serif);font-size:1.3rem;margin-bottom:1.4rem;
+}
+.checkout{
+  width:100%;background:var(--bordo);color:var(--cru);border:0;padding:1.1rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  transition:background .25s;
+}
+.checkout:hover{background:var(--bordo-deep)}
+.drawer-note{font-size:.76rem;opacity:.55;text-align:center;margin-top:1rem;line-height:1.6}
+
+/* ---------- Movimento ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.3,1)}
+.reveal.on{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  .reveal{opacity:1!important;transform:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ==========================================================================
+   TELEMÓVEL
+   ========================================================================== */
+
+/* Tablet / telemóvel largo: as bandas deixam de ser meias-páginas.
+   Sem isto, .band-media herda min-height em vh e estica sem controlo. */
+@media(max-width:980px){
+  .band-media{min-height:0}
+  .band-media img{height:auto;aspect-ratio:4/3}
+  .band-media.garrafa{padding:3.5rem 1.5rem}
+  .band-media.garrafa .bottle{max-height:46vh}
+}
+
+@media(max-width:760px){
+  /* --- Cabeçalho ---
+     A grelha de 3 colunas dependia do .header-l. Escondê-lo tirava uma coluna
+     e o logótipo deixava de estar ao centro. Passa a uma coluna só, com o
+     cesto ancorado à direita. */
+  .header-in{
+    grid-template-columns:1fr;justify-items:center;
+    position:relative;padding:1.05rem 4.75rem .5rem;
+  }
+  .header-l{display:none}
+  .header-r{position:absolute;right:1rem;top:.9rem}
+  .logo{font-size:1.5rem}
+  .cart-btn{padding:.5rem .8rem;font-size:.6rem;letter-spacing:.1em}
+  nav.main{
+    gap:1.5rem;font-size:.62rem;letter-spacing:.12em;
+    padding:.2rem .75rem .85rem;flex-wrap:wrap;
+  }
+
+  .announce{font-size:.6rem;letter-spacing:.14em;padding:.6rem .9rem}
+
+  /* --- Hero --- */
+  .hero-in{padding:calc(var(--header-h, 112px) + 2.5rem) 1.25rem 5.5rem}
+  .hero-eyebrow{font-size:.62rem;letter-spacing:.2em;margin-bottom:1.3rem}
+  .hero-sub{margin:1.5rem auto 2.2rem}
+  .hero-ctas{flex-direction:column;align-items:center;gap:.8rem}
+  .hero-ctas .btn{width:100%;max-width:300px;text-align:center}
+  .hero-cue{bottom:1.4rem}
+
+  /* --- Botões: menos espaçamento, mais área de toque --- */
+  .btn{padding:.95rem 1.8rem;font-size:.7rem;letter-spacing:.16em}
+
+  /* --- Cabeçalho de página --- */
+  .page-head{padding:4rem 1.5rem 3.2rem}
+
+  /* --- Loja: os filtros partiam-se com "Praia & Extras" sozinho --- */
+  .filters{gap:1rem 1.4rem;margin-bottom:3rem}
+  .filter{font-size:.64rem;letter-spacing:.14em}
+  .grid{gap:2.8rem 1.5rem}
+
+  /* --- Fecho de página --- */
+  .next-in{padding:3.5rem 1.5rem;flex-direction:column;align-items:flex-start}
+
+  /* --- Rodapé --- */
+  footer{padding-top:4rem}
+  .foot-top{padding:0 1.5rem 3rem}
+  .foot-logo{font-size:2.1rem}
+  .foot-in{padding:3rem 1.5rem}
+  .foot-bottom{padding:1.5rem}
+
+  /* --- Cesto: alvos de toque maiores --- */
+  .drawer-head{padding:1.4rem}
+  .drawer-items{padding:1.2rem 1.4rem}
+  .d-qty button{width:32px;height:32px;font-size:1rem}
+  .drawer-close{font-size:2rem;padding:.2rem .4rem}
+  .drawer-foot{padding:1.4rem}
+}
+
+/* Telemóvel estreito */
+@media(max-width:560px){
+  /* Chave e valor lado a lado espremiam-se; passam a empilhar. */
+  .ficha-l{flex-direction:column;align-items:flex-start;gap:.3rem;padding:1.2rem 0}
+  .ficha-v{text-align:left}
+  .fecho{padding:4rem 1.25rem}
+  .duo-col{padding:3rem 1.5rem}
+  .band-text{padding:3.5rem 1.5rem}
+  .sec{padding:4.5rem 1.25rem}
+}
