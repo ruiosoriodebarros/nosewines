@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loja · NO SÉ!</title>
+<meta name="description" content="Merch oficial No Sé!, para usar enquanto a primeira colheita não chega.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/nose.css">
+</head>
+<body>
+
+<div class="announce">
+  <span class="msg msg--1">Portes grátis em Portugal continental a partir de 50&euro;</span>
+  <span class="msg msg--2">Entregas em 48h 🚚📦</span>
+</div>
+
+<header>
+  <div class="header-in">
+    <span class="header-l">Alentejo · Portugal</span>
+    <a class="logo" href="index.html">NO SÉ<span class="bang">!</span></a>
+    <span class="header-r">
+      <button class="cart-btn" onclick="toggleCart()">Cesto (<span id="cart-count">0</span>)</button>
+    </span>
+  </div>
+  <nav class="main">
+    <a href="manifesto.html">Manifesto</a>
+    <a href="loja.html" class="active" aria-current="page">Loja</a>
+    <a href="vinho.html">O Vinho</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero hero-mid">
+  <img class="hero-bg" src="assets/img/loja.svg" alt="Uma banca de feira com toldo listrado e mercadoria No Sé!, na planície alentejana">
+  <div class="hero-scrim"></div>
+  <div class="hero-in">
+    <p class="crumb"><a href="index.html">Início</a><i>/</i>Loja</p>
+    <h1 class="page-title">O vinho ainda está a caminho.<br>A atitude já se veste.</h1>
+    <p class="hero-sub">Merch oficial No Sé!, para usar enquanto a primeira colheita não chega.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-in">
+    <div class="filters" role="group" aria-label="Filtrar produtos">
+      <button class="filter active" data-cat="todos">Todos</button>
+      <button class="filter" data-cat="bones">Bonés</button>
+      <button class="filter" data-cat="roupa">Roupa</button>
+      <button class="filter" data-cat="extras">Praia &amp; Extras</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="next-in">
+    <div>
+      <p class="next-l">A seguir</p>
+      <p class="next-t">E o vinho? Está a caminho.</p>
+    </div>
+    <a class="btn btn-solid" href="vinho.html">Conhecer o vinho</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-top">
+    <p class="foot-logo">NO SÉ<span class="bang">!</span></p>
+    <p class="foot-tag">No sé até onde isto vai chegar. Mas sei que não vai passar despercebido.</p>
+  </div>
+  <div class="foot-in">
+    <div class="foot-col">
+      <p class="foot-h">Navegar</p>
+      <a href="manifesto.html">Manifesto</a>
+      <a href="loja.html">Loja</a>
+      <a href="vinho.html">O Vinho</a>
+    </div>
+    <div class="foot-col">
+      <p class="foot-h">Morada</p>
+      <p>Ainda sem herdade.<br>Planície alentejana,<br>Portugal.</p>
+    </div>
+    <div class="foot-col">
+      <p class="foot-h">Contacte-nos</p>
+      <a href="mailto:ola@nose.pt">ola@nose.pt</a>
+      <p>Visitas e provas:<br>quando houver vinho.</p>
+    </div>
+    <div class="foot-col">
+      <p class="foot-h">Informação</p>
+      <a href="#" aria-disabled="true">Instagram</a>
+      <a href="#" aria-disabled="true">Envios e trocas</a>
+      <a href="#" aria-disabled="true">Termos e condições</a>
+      <a href="#" aria-disabled="true">Livro de reclamações</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 No Sé! · Alentejo, Portugal</span>
+    <span>Sê responsável. Aprecia com moderação.</span>
+  </div>
+</footer>
+
+<div class="drawer-bg" onclick="toggleCart(false)"></div>
+<aside class="drawer" aria-label="Cesto de compras">
+  <div class="drawer-head">
+    <h3>O teu cesto</h3>
+    <button class="drawer-close" onclick="toggleCart(false)" aria-label="Fechar">×</button>
+  </div>
+  <div class="drawer-items" id="drawer-items">
+    <p class="drawer-empty">Ainda não sabes o que queres?<br>Nós também não. Faz parte.</p>
+  </div>
+  <div class="drawer-foot" id="drawer-foot">
+    <div class="drawer-total"><span>Total</span><span id="cart-total">0,00 €</span></div>
+    <button class="checkout" onclick="checkout()">Finalizar encomenda</button>
+    <p class="drawer-note">A encomenda segue por email enquanto a loja online não abre.</p>
+  </div>
+</aside>
+
+<script src="assets/produtos.js"></script>
+<script src="assets/nose.js"></script>
+</body>
+</html>
